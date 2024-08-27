@@ -59,13 +59,13 @@ app.get("/tasks", async (req, res) => {
 app.post("/tasks", async (req, res) => {
    // const task = new prisma(req.body)
    // await task.save()
-    await prisma.task.create({
+    const task = await prisma.task.create({
         data : {
             text: req.body.text,
             done: req.body.done
         }
     })
-    res.status(200).json({message: "funcionou"})
+    res.status(200).json(task)
 })
 
 app.put("/tasks/:id", async (req, res) => {
@@ -81,7 +81,7 @@ app.put("/tasks/:id", async (req, res) => {
     }
    })
     //req.json(task)
-    res.status(200).json({message: "funciona"})
+    res.status(200).json({message: "funci"})
 } 
 catch (err){
     res.status(400).json({ err: err.message })
@@ -92,12 +92,12 @@ app.delete("/tasks/:id", async (req, res) => {
     try {
     //await Task.findByIdAndDelete(req.params.id)
 
-    await prisma.task.delete({
+    const task = await prisma.task.delete({
         where: {
             id: req.params.id
         }
     })
-    res.json({ message: "Task deleted" })
+    res.status(200).json(task)
     }
     catch (err) {
         res.status(400).json( {err: err.message} )
