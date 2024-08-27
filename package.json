@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
+    "vercel-build": "prisma generate",
     "build": "prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
