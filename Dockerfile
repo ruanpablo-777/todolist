@@ -1,13 +1,12 @@
-# Usa uma imagem leve do Node.js
-FROM node:20-alpine
+# Usa Node.js oficial baseado em Debian (não Alpine)
+FROM node:20
 
-# Define o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copia package.json e package-lock.json primeiro
+# Copia package.json e package-lock.json
 COPY package*.json ./
 
-# Instala todas as dependências (dev e prod, para poder gerar o Prisma Client)
+# Instala todas as dependências
 RUN npm install
 
 # Copia o restante do código
@@ -19,5 +18,5 @@ RUN npx prisma generate
 # Expõe a porta que o app vai rodar
 EXPOSE 3000
 
-# Comando para rodar a aplicação
+# Comando para iniciar
 CMD ["npm", "start"]
